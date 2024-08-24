@@ -16,7 +16,7 @@ const ConstructionsContainer = ({ customerDetails, companyName }) => {
   }; */
 
   return (
-    <div className="p-4">
+    <div>
       <ConstructionsPresentation
         constructions={customerDetails}
         /*   onEdit={handleEdit}

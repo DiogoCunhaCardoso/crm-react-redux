@@ -6,23 +6,26 @@ const Breadcrumb = () => {
   const pathnames = location.pathname.split("/").filter((x) => x);
 
   return (
-    <nav className="flex items-center space-x-2 p-4">
+    <nav className="flex items-center space-x-2 p-4 text-sm">
       <Link to="/" className="text-blue-500 hover:text-blue-700">
         Home
       </Link>
       {pathnames.map((pathname, index) => {
         const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+        const isLast = index === pathnames.length - 1;
+
         return (
           <React.Fragment key={to}>
-            <span>&gt;</span>
-            <Link
-              to={to}
-              className={`text-blue-500 hover:text-blue-700 ${
-                index === pathnames.length - 1 ? "font-bold" : ""
-              }`}
-            >
-              {decodeURIComponent(pathname)}
-            </Link>
+            {index > 0 && <span>&gt;</span>}
+            {isLast ? (
+              <span className="text-blue-500 font-bold select-none">
+                {decodeURIComponent(pathname)}
+              </span>
+            ) : (
+              <Link to={to} className="text-blue-500 hover:text-blue-700">
+                {decodeURIComponent(pathname)}
+              </Link>
+            )}
           </React.Fragment>
         );
       })}

@@ -1,3 +1,5 @@
+import { FaPen, FaTrash } from "react-icons/fa";
+
 const ContactsPresentation = ({
   contacts,
   isModalOpen,
@@ -39,19 +41,19 @@ const ContactsPresentation = ({
                   <td className="p-4 text-sm">{contact.mobileNumber}</td>
                   <td className="p-4 text-sm">{contact.linkedin}</td>
                   <td className="p-4 text-sm">{contact.birthday}</td>
-                  <td className="p-4 text-sm flex gap-2">
-                    <button
-                      onClick={() => onEdit(contact.name)}
-                      className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => onDelete(contact.name)}
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-                    >
-                      Delete
-                    </button>
+                  <td className="p-4 text-sm ">
+                    <div className="flex gap-3 items-center justify-center">
+                      <FaPen
+                        onClick={() => onEdit(contact.name)}
+                        className="text-gray-600 cursor-pointer hover:text-blue-500 hover:scale-[1.18] transition-transform"
+                        size={12}
+                      />
+                      <FaTrash
+                        onClick={() => onDelete(contact.name)}
+                        className="text-gray-600 cursor-pointer hover:text-red-500 hover:scale-[1.18] transition-transform"
+                        size={12}
+                      />
+                    </div>
                   </td>
                 </tr>
               ))

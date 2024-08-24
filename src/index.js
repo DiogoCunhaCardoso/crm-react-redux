@@ -28,6 +28,11 @@ const router = createBrowserRouter([
         path: "customers/:customerName",
         element: <CustomerDetailPage />,
       },
+
+      {
+        path: "customers/:customerName/:workName",
+        element: <CustomerDetailPage />,
+      },
     ],
   },
 ]);

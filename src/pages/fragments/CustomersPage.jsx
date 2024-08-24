@@ -15,10 +15,36 @@ export default function CustomersPage() {
     identification: {
       companyName: "",
       ownerName: "",
+      taxId: "",
+      commercialName: "",
+      phoneNumber: "",
+      clientNo: "",
+      mobilePhoneNumber: "",
+      lead: "",
+      emailMkt: "",
+      address: "",
+      emailComercial: "",
+      postalCode: "",
+      transportationZone: "",
+      local: "",
+      channel: "",
+      district: "",
+      website: "",
+      territory: "",
+      instagram: "",
+      regionNut: "",
+      linkedin: "",
     },
     sales: {
-      payments: {},
-      discounts: [],
+      payments: {
+        paymentTerm: "",
+        requiredCredit: "",
+        approvedCredit: "",
+      },
+      discounts: [
+        { channel: "Canal", discount: "" },
+        { channel: "Obra", discount: "" },
+      ],
     },
     contacts: [],
     construction: [],
@@ -69,18 +95,19 @@ export default function CustomersPage() {
     <div className="flex-1 p-4 border-2 border-gray-200 border-dashed rounded-lg">
       <Breadcrumb />
 
-      <div className="flex items-center mb-4">
+      <div className="flex items-center mb-4 ">
+        {/*  S E A R C H _ I N P U T */}
         <input
           type="search"
-          name="Search"
           placeholder="Search"
-          className="border py-1 px-2 rounded-2 w-full"
+          className="border p-2 rounded-md w-full focus:outline-gray-100"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+        {/* A D D _ C U S T O M E R _ B T N */}
         <button
           onClick={() => setModalOpen(true)}
-          className="ml-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+          className="ml-2 text-white bg-blue-700 hover:bg-blue-800 p-2 rounded-md"
         >
           <FaPlus />
         </button>
@@ -118,12 +145,10 @@ export default function CustomersPage() {
       {/* Modal */}
       {isModalOpen && (
         <div
-          id="authentication-modal"
-          tabIndex="-1"
           aria-hidden="true"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
         >
-          <div className="relative p-4 w-full max-w-md bg-white rounded-lg shadow">
+          <div className="relative p-6 w-full max-w-md bg-white rounded-lg shadow">
             <button
               type="button"
               className="absolute top-2 right-2 text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg p-1"
@@ -146,10 +171,13 @@ export default function CustomersPage() {
               </svg>
               <span className="sr-only">Close modal</span>
             </button>
-            <h3 className="text-xl font-semibold text-gray-900">
-              Add New Customer
-            </h3>
-            <div className="p-4">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Create Company
+            </h2>
+            <p className="text-[#64748B] text-sm mt-2">
+              Create the basic fields for a company.
+            </p>
+            <div className="py-4">
               <form className="space-y-4">
                 <div>
                   <label
@@ -161,7 +189,6 @@ export default function CustomersPage() {
                   <input
                     type="text"
                     id="companyName"
-                    value={newCustomer.identification.companyName}
                     onChange={(e) =>
                       setNewCustomer({
                         ...newCustomer,

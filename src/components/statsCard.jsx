@@ -13,10 +13,10 @@ const StatsCard = ({ title, value, iconSize = 24, percentage }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex justify-between items-center bg-[#F1F5F9] w-[280px] p-6 rounded-lg">
+      <div className="flex justify-between items-center bg-[#F1F5F9] w-[280px] p-5 rounded-lg">
         <div>
           <p className="text-[#64748B] mb-0.5 text-xs">{title}</p>
-          <p className="text-[#1E1E1E] font-semibold text-3xl">{value}</p>
+          <p className="text-[#1E1E1E] font-semibold text-2xl">{value}</p>
         </div>
         <div className="bg-white rounded-md p-4">
           <FaDollarSign size={iconSize} />

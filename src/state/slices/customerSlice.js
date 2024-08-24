@@ -102,30 +102,6 @@ const initialState = {
         ownerName: "Michael Johnson",
       },
     },
-    {
-      identification: {
-        companyName: "Greenwood Solutions LLC",
-        ownerName: "Emily Greenwood",
-      },
-    },
-    {
-      identification: {
-        companyName: "Carter Industries",
-        ownerName: "William Carter",
-      },
-    },
-    {
-      identification: {
-        companyName: "OceanView Enterprises",
-        ownerName: "James Mitchell",
-      },
-    },
-    {
-      identification: {
-        companyName: "Summit Technologies Inc.",
-        ownerName: "Sarah Turner",
-      },
-    },
   ],
 };
 
@@ -143,14 +119,35 @@ const customerSlice = createSlice({
       );
     },
     updateCustomer: (state, action) => {
-      const { companyName, updates } = action.payload;
+      const { companyName, updatedCustomer } = action.payload;
       const customer = state.data.find(
         (c) => c.identification.companyName === companyName
       );
-      if (customer) {
-        Object.assign(customer, updates);
+      Object.assign(customer.identification, updatedCustomer);
+    },
+
+    //
+    //
+    //
+    // S A L E S
+    updateSales: (state, action) => {
+      const { companyName, updatedSale, key } = action.payload;
+      const customer = state.data.find(
+        (c) => c.identification.companyName === companyName
+      );
+
+      if (customer && customer.sales) {
+        if (Array.isArray(customer.sales[key])) {
+          // HANDLE AS ARRAY
+          customer.sales[key] = updatedSale;
+        } else {
+          // HANDLE AS OBJECT
+          customer.sales[key] = updatedSale;
+        }
       }
     },
+
+    //
     //
     //
     // C O N T A C T S
@@ -191,6 +188,29 @@ const customerSlice = createSlice({
       }
     },
   },
+  //
+  //
+  //
+  // C O N S T R U C T I O N S
+  updateConstruction: (state, action) => {
+    const { companyName, updatedConstruction } = action.payload;
+    const customer = state.data.find(
+      (c) => c.identification.companyName === companyName
+    );
+
+    if (customer) {
+      const constructionIndex = customer.constructions.findIndex(
+        (construction) => construction.name === updatedConstruction.name
+      );
+
+      if (constructionIndex !== -1) {
+        customer.constructions[constructionIndex] = {
+          ...customer.constructions[constructionIndex],
+          ...updatedConstruction,
+        };
+      }
+    }
+  },
 });
 
 // GET CUSTOMER BY ID
@@ -206,9 +226,11 @@ export const {
   addCustomer,
   deleteCustomer,
   updateCustomer,
+  updateSales,
   addContact,
   updateContact,
   deleteContact,
+  updateConstruction,
 } = customerSlice.actions;
 
 export default customerSlice.reducer;
